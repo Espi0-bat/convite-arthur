@@ -1,2 +1,15 @@
-.DS_Store
+# Configuração local do Claude Code (não deve ir para o repositório público)
+.claude/
+
+# Arquivos de sistema (Windows / OneDrive / macOS)
 Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs e temporários
+*.log
+*.tmp
+~$*
+
+# Dependências (caso o projeto cresça no futuro)
+node_modules/
