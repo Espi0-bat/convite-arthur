@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Convite Arthur//PT-BR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:arthur-1aninho-2026@convite-arthur
+DTSTAMP:20260714T000000Z
+DTSTART:20260822T200000Z
+DTEND:20260822T230000Z
+SUMMARY:Aniversário de 1 aninho do Arthur
+DESCRIPTION:Vem celebrar com a gente o primeiro aninho do Arthur!
+LOCATION:Cond Maxximo Garden\, Salão de Festas\, Jardim Botânico (Lago Sul)\, Brasília/DF
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aniversário de 1 aninho do Arthur</title>
+<meta name="description" content="Vem celebrar com a gente o primeiro aninho do Arthur! Confira data, local e confirme sua presença.">
+
+<meta property="og:title" content="Aniversário de 1 aninho do Arthur">
+<meta property="og:description" content="Vem celebrar com a gente! Confira todos os detalhes e confirme sua presença.">
+<meta property="og:image" content="assets/img/arthur-03.jpeg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="leaf-decor leaf-decor--top-left" aria-hidden="true">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 190 C 10 100, 60 20, 160 10 C 150 60, 150 120, 190 150 C 130 160, 60 150, 10 190 Z" fill="#3f6c4c"/>
+    <path d="M20 185 C 30 110, 75 45, 150 20" stroke="#2c4f37" stroke-width="3" fill="none"/>
+    <path d="M40 40 C 60 60, 65 90, 55 120" stroke="#6b8e5a" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M30 60 C 50 75, 55 95, 48 115" stroke="#6b8e5a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<div class="leaf-decor leaf-decor--top-right" aria-hidden="true">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M190 190 C 190 100, 140 20, 40 10 C 50 60, 50 120, 10 150 C 70 160, 140 150, 190 190 Z" fill="#3f6c4c"/>
+    <path d="M180 185 C 170 110, 125 45, 50 20" stroke="#2c4f37" stroke-width="3" fill="none"/>
+    <path d="M160 40 C 140 60, 135 90, 145 120" stroke="#6b8e5a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<header class="hero">
+  <div class="carousel" id="carousel">
+    <div class="carousel-track" id="carouselTrack"></div>
+    <button class="carousel-arrow carousel-arrow--prev" id="prevBtn" aria-label="Foto anterior">&#10094;</button>
+    <button class="carousel-arrow carousel-arrow--next" id="nextBtn" aria-label="Próxima foto">&#10095;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+  <div class="hero-overlay">
+    <p class="hero-kicker">Festa de Aniversário</p>
+    <h1 class="hero-title">Arthur</h1>
+    <p class="hero-subtitle">1 aninho</p>
+  </div>
+</header>
+
+<main>
+  <section class="card welcome-card">
+    <h2>Olá, bem-vindos ao aniversário do ano!</h2>
+    <p class="highlight">💛 Queridos amigos e familiares 💛</p>
+    <p>Este site foi feito com muito carinho para compartilhar com vocês todos os detalhes da festa de 1 aninho do Arthur, que está chegando! 🐾🎉🎂</p>
+  </section>
+
+  <section class="card">
+    <h2>Informações do Evento</h2>
+    <p class="section-subtitle">Os principais detalhes para vocês se organizarem com tranquilidade.</p>
+
+    <div class="info-row">
+      <div class="info-icon">📅</div>
+      <div class="info-text">
+        <strong>Sábado, 22 de agosto de 2026</strong>
+        <span>17h00</span>
+      </div>
+      <div class="calendar-buttons">
+        <a class="cal-btn" href="assets/arthur-aniversario.ics" download title="Adicionar no Apple Calendar / Outlook">🍏</a>
+        <a class="cal-btn" id="googleCalBtn" href="#" target="_blank" rel="noopener" title="Adicionar no Google Agenda">📆</a>
+        <a class="cal-btn" href="assets/arthur-aniversario.ics" download title="Adicionar no Outlook / Windows">🪟</a>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-icon">📍</div>
+      <div class="info-text">
+        <strong>Cond Maxximo Garden — Salão de Festas</strong>
+        <span>Jardim Botânico (Lago Sul), Brasília/DF</span>
+      </div>
+    </div>
+
+    <div class="map-embed">
+      <iframe
+        src="https://www.google.com/maps?q=Condom%C3%ADnio%20Maxximo%20Garden%2C%20Jardim%20Bot%C3%A2nico%2C%20Lago%20Sul%2C%20Bras%C3%ADlia%20-%20DF&output=embed"
+        width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" title="Mapa do local da festa"></iframe>
+    </div>
+  </section>
+
+  <section class="card" id="rsvp">
+    <h2>Confirmar Presença</h2>
+    <p class="section-subtitle">Confirme e ajude a gente a organizar essa festa!</p>
+
+    <form id="rsvpForm" class="rsvp-form">
+      <label for="rsvpName">Nome</label>
+      <input type="text" id="rsvpName" placeholder="Digite seu nome" required>
+
+      <label for="rsvpCompanions">Quantos acompanhantes vêm com você?</label>
+      <input type="number" id="rsvpCompanions" min="0" value="0">
+
+      <div class="rsvp-buttons">
+        <button type="button" class="btn btn--outline" id="rsvpNo">Não vou ✕</button>
+        <button type="button" class="btn btn--primary" id="rsvpYes">Sim, vou! ✔</button>
+      </div>
+      <p class="rsvp-hint">Ao confirmar, vamos abrir o WhatsApp com uma mensagem prontinha pra você só enviar. 📲</p>
+    </form>
+  </section>
+
+  <section class="card" id="presentear">
+    <h2>Presentear</h2>
+    <p class="section-subtitle">Dê um presente para o Arthur e torne esse dia ainda mais especial!</p>
+
+    <div class="gift-suggestions">
+      <h3>Sugestões de presente</h3>
+      <ul id="giftList">
+        <li>Fraldas tamanho G</li>
+        <li>Roupinhas tamanho 1–2 anos</li>
+        <li>Brinquedos educativos</li>
+        <li>Livros infantis</li>
+      </ul>
+      <p class="gift-note">Lista provisória — em breve atualizamos com mais sugestões.</p>
+    </div>
+
+    <div class="pix-card">
+      <h3>Prefere mandar uma contribuição via Pix?</h3>
+      <p>Ótima opção pra quem mora longe (👋 parentes do Sul!) e não vai conseguir trazer o presente em mãos.</p>
+      <img src="assets/pix/pix-qr.png" alt="QR Code Pix" class="pix-qr">
+      <div class="pix-copy">
+        <input type="text" id="pixCode" readonly value="00020101021126330014br.gov.bcb.pix0111049644681945204000053039865802BR5924ALINE GERHARDT RODRIGUES6009SAO PAULO622905251KXENZFPJ57V5YPDM70TA7PPW6304A311">
+        <button type="button" id="copyPixBtn" class="btn btn--primary">Copiar chave</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Com carinho, esperamos por você! 🦁🌿</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
