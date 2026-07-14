@@ -9,7 +9,8 @@ const PHOTOS = [
   "arthur-19.jpeg",
 ];
 
-// ---- Carousel ----
+// ---- Carrossel ----
+const carousel = document.getElementById("carousel");
 const track = document.getElementById("carouselTrack");
 const dotsWrap = document.getElementById("carouselDots");
 let current = 0;
@@ -20,11 +21,12 @@ PHOTOS.forEach((file, i) => {
   img.src = `assets/img/${file}`;
   img.alt = `Foto do Arthur ${i + 1}`;
   img.loading = i === 0 ? "eager" : "lazy";
+  img.decoding = "async";
   track.appendChild(img);
 
   const dot = document.createElement("button");
   dot.setAttribute("aria-label", `Ir para foto ${i + 1}`);
-  dot.addEventListener("click", () => goTo(i));
+  dot.addEventListener("click", () => { goTo(i); resetAutoplay(); });
   dotsWrap.appendChild(dot);
 });
 
@@ -32,20 +34,62 @@ function goTo(index) {
   current = (index + PHOTOS.length) % PHOTOS.length;
   track.style.transform = `translateX(-${current * 100}%)`;
   [...dotsWrap.children].forEach((d, i) => d.classList.toggle("active", i === current));
+
+  // pré-carrega a próxima foto para a troca ser instantânea
+  const next = track.children[(current + 1) % PHOTOS.length];
+  if (next && next.loading === "lazy") next.loading = "eager";
+}
+
+function stopAutoplay() {
+  clearInterval(autoplayTimer);
+  autoplayTimer = null;
 }
 
 function resetAutoplay() {
-  clearInterval(autoplayTimer);
+  stopAutoplay();
   autoplayTimer = setInterval(() => goTo(current + 1), 4000);
 }
 
 document.getElementById("prevBtn").addEventListener("click", () => { goTo(current - 1); resetAutoplay(); });
 document.getElementById("nextBtn").addEventListener("click", () => { goTo(current + 1); resetAutoplay(); });
 
+// pausa o autoplay enquanto o convidado olha/interage; retoma depois
+carousel.addEventListener("mouseenter", stopAutoplay);
+carousel.addEventListener("mouseleave", resetAutoplay);
+
+// swipe no celular
+let touchStartX = null;
+let touchStartY = null;
+
+carousel.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  stopAutoplay();
+}, { passive: true });
+
+carousel.addEventListener("touchend", (e) => {
+  if (touchStartX !== null) {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      goTo(dx < 0 ? current + 1 : current - 1);
+    }
+  }
+  touchStartX = null;
+  touchStartY = null;
+  resetAutoplay();
+}, { passive: true });
+
+// não desperdiça dados trocando fotos com a aba escondida
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) stopAutoplay();
+  else resetAutoplay();
+});
+
 goTo(0);
 resetAutoplay();
 
-// ---- Google Calendar link ----
+// ---- Link do Google Agenda ----
 const googleCalBtn = document.getElementById("googleCalBtn");
 const calParams = new URLSearchParams({
   action: "TEMPLATE",
@@ -60,6 +104,12 @@ googleCalBtn.href = `https://www.google.com/calendar/render?${calParams.toString
 const nameInput = document.getElementById("rsvpName");
 const companionsInput = document.getElementById("rsvpCompanions");
 
+// mantém o número de acompanhantes dentro de limites razoáveis
+companionsInput.addEventListener("change", () => {
+  const n = parseInt(companionsInput.value, 10);
+  companionsInput.value = isNaN(n) ? 0 : Math.min(20, Math.max(0, n));
+});
+
 function sendRsvp(going) {
   const name = nameInput.value.trim();
   if (!name) {
@@ -69,7 +119,7 @@ function sendRsvp(going) {
   }
   nameInput.style.borderColor = "";
 
-  const companions = parseInt(companionsInput.value, 10) || 0;
+  const companions = Math.min(20, Math.max(0, parseInt(companionsInput.value, 10) || 0));
   let message;
   if (going) {
     message = `Oi! Aqui é ${name}. Confirmando presença na festa de 1 aninho do Arthur! 🎉`;
@@ -80,14 +130,17 @@ function sendRsvp(going) {
     message = `Oi! Aqui é ${name}. Infelizmente não conseguiremos ir na festa do Arthur, mas obrigado pelo convite! 💛`;
   }
 
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank", "noopener");
+  // navegação na mesma aba: nunca é bloqueada por webviews (WhatsApp, Instagram)
+  window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
 document.getElementById("rsvpYes").addEventListener("click", () => sendRsvp(true));
 document.getElementById("rsvpNo").addEventListener("click", () => sendRsvp(false));
 
 // ---- Copiar código Pix ----
+const pixCodeInput = document.getElementById("pixCode");
+pixCodeInput.value = PIX_CODE;
+
 async function copyPix(button) {
   try {
     await navigator.clipboard.writeText(PIX_CODE);
@@ -106,31 +159,49 @@ async function copyPix(button) {
 
 document.getElementById("copyPixBtn").addEventListener("click", (e) => copyPix(e.currentTarget));
 
-// ---- Modal de presente via Pix ----
+// ---- Pop-up de presente via Pix ----
 const giftModal = document.getElementById("giftModal");
 const giftModalTitle = document.getElementById("giftModalTitle");
+const giftModalClose = document.getElementById("giftModalClose");
+let lastFocusedElement = null;
 
 document.querySelectorAll(".gift-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-    const gift = btn.dataset.gift;
-    const emoji = btn.dataset.emoji;
-    giftModalTitle.textContent = `${emoji} ${gift}`;
+    giftModalTitle.textContent = `${btn.dataset.emoji} ${btn.dataset.gift}`;
+    lastFocusedElement = btn;
     giftModal.classList.add("open");
     document.body.style.overflow = "hidden";
+    giftModalClose.focus();
   });
 });
 
 function closeGiftModal() {
   giftModal.classList.remove("open");
   document.body.style.overflow = "";
+  if (lastFocusedElement) lastFocusedElement.focus();
 }
 
-document.getElementById("giftModalClose").addEventListener("click", closeGiftModal);
+giftModalClose.addEventListener("click", closeGiftModal);
 giftModal.addEventListener("click", (e) => {
   if (e.target === giftModal) closeGiftModal();
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && giftModal.classList.contains("open")) closeGiftModal();
+});
+
+// mantém o Tab dentro do pop-up enquanto ele estiver aberto
+giftModal.addEventListener("keydown", (e) => {
+  if (e.key !== "Tab") return;
+  const focusables = giftModal.querySelectorAll("button");
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
 });
 
 document.getElementById("giftModalCopyBtn").addEventListener("click", (e) => copyPix(e.currentTarget));

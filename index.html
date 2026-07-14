@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2c4f37">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
 <title>Aniversário de 1 aninho do Arthur</title>
 <meta name="description" content="Vem celebrar com a gente o primeiro aninho do Arthur! Confira data, local e confirme sua presença.">
 
@@ -15,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
+<link rel="preload" as="image" href="assets/img/arthur-04.jpeg">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -96,9 +99,8 @@
         <span>17h00</span>
       </div>
       <div class="calendar-buttons">
-        <a class="cal-btn" href="assets/arthur-aniversario.ics" download title="Adicionar no Apple Calendar / Outlook">🍏</a>
         <a class="cal-btn" id="googleCalBtn" href="#" target="_blank" rel="noopener" title="Adicionar no Google Agenda">📆</a>
-        <a class="cal-btn" href="assets/arthur-aniversario.ics" download title="Adicionar no Outlook / Windows">🪟</a>
+        <a class="cal-btn" href="assets/arthur-aniversario.ics" download title="Baixar convite para Apple Calendar / Outlook">📥</a>
       </div>
     </div>
 
@@ -128,7 +130,7 @@
       <input type="text" id="rsvpName" placeholder="Digite seu nome" required>
 
       <label for="rsvpCompanions">Quantos acompanhantes vêm com você?</label>
-      <input type="number" id="rsvpCompanions" min="0" value="0">
+      <input type="number" id="rsvpCompanions" min="0" max="20" step="1" inputmode="numeric" value="0">
 
       <div class="rsvp-buttons">
         <button type="button" class="btn btn--outline" id="rsvpNo">Não vou ✕</button>
@@ -159,7 +161,7 @@
       <h3>Prefere mandar uma contribuição via Pix?</h3>
       <img src="assets/pix/pix-qr.png" alt="QR Code Pix" class="pix-qr">
       <div class="pix-copy">
-        <input type="text" id="pixCode" readonly value="00020101021126330014br.gov.bcb.pix0111049644681945204000053039865802BR5924ALINE GERHARDT RODRIGUES6009SAO PAULO622905251KXENZFPJ57V5YPDM70TA7PPW6304A311">
+        <input type="text" id="pixCode" readonly>
         <button type="button" id="copyPixBtn" class="btn btn--primary">Copiar chave</button>
       </div>
     </div>
