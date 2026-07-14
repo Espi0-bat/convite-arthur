@@ -8,17 +8,18 @@
 
 <meta property="og:title" content="Aniversário de 1 aninho do Arthur">
 <meta property="og:description" content="Vem celebrar com a gente! Confira todos os detalhes e confirme sua presença.">
-<meta property="og:image" content="https://espi0-bat.github.io/convite-arthur/assets/img/arthur-03.jpeg">
+<meta property="og:image" content="https://espi0-bat.github.io/convite-arthur/assets/img/arthur-04.jpeg">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- Folhagens decorativas fixas -->
 <div class="leaf-decor leaf-decor--top-left" aria-hidden="true">
   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <path d="M10 190 C 10 100, 60 20, 160 10 C 150 60, 150 120, 190 150 C 130 160, 60 150, 10 190 Z" fill="#3f6c4c"/>
@@ -36,28 +37,55 @@
   </svg>
 </div>
 
+<div class="leaf-decor leaf-decor--bottom-left" aria-hidden="true">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 10 C 10 100, 60 180, 160 190 C 150 140, 150 80, 190 50 C 130 40, 60 50, 10 10 Z" fill="#3f6c4c"/>
+    <path d="M20 15 C 30 90, 75 155, 150 180" stroke="#2c4f37" stroke-width="3" fill="none"/>
+  </svg>
+</div>
+
+<div class="leaf-decor leaf-decor--bottom-right" aria-hidden="true">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M190 10 C 190 100, 140 180, 40 190 C 50 140, 50 80, 10 50 C 70 40, 140 50, 190 10 Z" fill="#3f6c4c"/>
+    <path d="M180 15 C 170 90, 125 155, 50 180" stroke="#2c4f37" stroke-width="3" fill="none"/>
+  </svg>
+</div>
+
+<!-- Capa em tela cheia -->
 <header class="hero">
-  <div class="carousel" id="carousel">
-    <div class="carousel-track" id="carouselTrack"></div>
-    <button class="carousel-arrow carousel-arrow--prev" id="prevBtn" aria-label="Foto anterior">&#10094;</button>
-    <button class="carousel-arrow carousel-arrow--next" id="nextBtn" aria-label="Próxima foto">&#10095;</button>
-    <div class="carousel-dots" id="carouselDots"></div>
-  </div>
-  <div class="hero-overlay">
-    <p class="hero-kicker">Festa de Aniversário</p>
+  <div class="hero-photo" role="img" aria-label="Arthur vestido de safári cercado de animais da savana"></div>
+  <div class="hero-content">
+    <p class="hero-kicker">🌿 Festa de Aniversário 🌿</p>
     <h1 class="hero-title">Arthur</h1>
-    <p class="hero-subtitle">1 aninho</p>
+    <p class="hero-subtitle">faz 1 aninho!</p>
+    <a class="btn btn--hero" href="#rsvp">Confirmar presença 🐾</a>
   </div>
+  <a class="hero-scroll" href="#bemvindos" aria-label="Rolar para ver os detalhes">▾</a>
 </header>
 
 <main>
-  <section class="card welcome-card">
+  <section class="card welcome-card" id="bemvindos">
+    <div class="section-emoji" aria-hidden="true">🦁</div>
     <h2>Olá, bem-vindos ao aniversário do ano!</h2>
     <p class="highlight">💛 Queridos amigos e familiares 💛</p>
     <p>Este site foi feito com muito carinho para compartilhar com vocês todos os detalhes da festa de 1 aninho do Arthur, que está chegando! 🐾🎉🎂</p>
+    <div class="leaf-divider" aria-hidden="true">🍃 🌿 🍃</div>
   </section>
 
   <section class="card">
+    <div class="section-emoji" aria-hidden="true">🐒</div>
+    <h2>Galeria do Nosso Pequeno Explorador</h2>
+    <p class="section-subtitle">Um pedacinho da aventura que é o primeiro ano do Arthur.</p>
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="carouselTrack"></div>
+      <button class="carousel-arrow carousel-arrow--prev" id="prevBtn" aria-label="Foto anterior">&#10094;</button>
+      <button class="carousel-arrow carousel-arrow--next" id="nextBtn" aria-label="Próxima foto">&#10095;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="section-emoji" aria-hidden="true">🐘</div>
     <h2>Informações do Evento</h2>
     <p class="section-subtitle">Os principais detalhes para vocês se organizarem com tranquilidade.</p>
 
@@ -91,6 +119,7 @@
   </section>
 
   <section class="card" id="rsvp">
+    <div class="section-emoji" aria-hidden="true">🦓</div>
     <h2>Confirmar Presença</h2>
     <p class="section-subtitle">Confirme e ajude a gente a organizar essa festa!</p>
 
@@ -110,16 +139,17 @@
   </section>
 
   <section class="card" id="presentear">
+    <div class="section-emoji" aria-hidden="true">🦒</div>
     <h2>Presentear</h2>
     <p class="section-subtitle">Dê um presente para o Arthur e torne esse dia ainda mais especial!</p>
 
     <div class="gift-suggestions">
       <h3>Sugestões de presente</h3>
       <ul id="giftList">
-        <li>Fraldas tamanho G</li>
-        <li>Roupinhas tamanho 1–2 anos</li>
-        <li>Brinquedos educativos</li>
-        <li>Livros infantis</li>
+        <li><span class="gift-emoji">🍼</span> Fraldas tamanho G</li>
+        <li><span class="gift-emoji">👕</span> Roupinhas tamanho 1–2 anos</li>
+        <li><span class="gift-emoji">🧸</span> Brinquedos educativos</li>
+        <li><span class="gift-emoji">📚</span> Livros infantis</li>
       </ul>
       <p class="gift-note">Lista provisória — em breve atualizamos com mais sugestões.</p>
     </div>
@@ -137,6 +167,7 @@
 </main>
 
 <footer class="site-footer">
+  <p class="paw-trail" aria-hidden="true">🐾 🐾 🐾</p>
   <p>Com carinho, esperamos por você! 🦁🌿</p>
 </footer>
 
