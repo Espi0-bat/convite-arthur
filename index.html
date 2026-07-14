@@ -145,18 +145,18 @@
 
     <div class="gift-suggestions">
       <h3>Sugestões de presente</h3>
+      <p class="gift-tip">💡 Toque em um presente para dá-lo via Pix!</p>
       <ul id="giftList">
-        <li><span class="gift-emoji">🍼</span> Fraldas tamanho G</li>
-        <li><span class="gift-emoji">👕</span> Roupinhas tamanho 1–2 anos</li>
-        <li><span class="gift-emoji">🧸</span> Brinquedos educativos</li>
-        <li><span class="gift-emoji">📚</span> Livros infantis</li>
+        <li><button type="button" class="gift-btn" data-gift="Fraldas tamanho G" data-emoji="🍼"><span class="gift-emoji">🍼</span> Fraldas tamanho G <span class="gift-go">➜</span></button></li>
+        <li><button type="button" class="gift-btn" data-gift="Roupinhas tamanho 1–2 anos" data-emoji="👕"><span class="gift-emoji">👕</span> Roupinhas tamanho 1–2 anos <span class="gift-go">➜</span></button></li>
+        <li><button type="button" class="gift-btn" data-gift="Brinquedos educativos" data-emoji="🧸"><span class="gift-emoji">🧸</span> Brinquedos educativos <span class="gift-go">➜</span></button></li>
+        <li><button type="button" class="gift-btn" data-gift="Livros infantis" data-emoji="📚"><span class="gift-emoji">📚</span> Livros infantis <span class="gift-go">➜</span></button></li>
       </ul>
-      <p class="gift-note">Lista provisória — em breve atualizamos com mais sugestões.</p>
+      <p class="gift-note">Lista provisória — em breve atualizamos com mais sugestões. Se preferir, também pode trazer o presente em mãos no dia da festa! 🎁</p>
     </div>
 
     <div class="pix-card">
       <h3>Prefere mandar uma contribuição via Pix?</h3>
-      <p>Ótima opção pra quem mora longe (👋 parentes do Sul!) e não vai conseguir trazer o presente em mãos.</p>
       <img src="assets/pix/pix-qr.png" alt="QR Code Pix" class="pix-qr">
       <div class="pix-copy">
         <input type="text" id="pixCode" readonly value="00020101021126330014br.gov.bcb.pix0111049644681945204000053039865802BR5924ALINE GERHARDT RODRIGUES6009SAO PAULO622905251KXENZFPJ57V5YPDM70TA7PPW6304A311">
@@ -170,6 +170,20 @@
   <p class="paw-trail" aria-hidden="true">🐾 🐾 🐾</p>
   <p>Com carinho, esperamos por você! 🦁🌿</p>
 </footer>
+
+<!-- Pop-up de presente via Pix -->
+<div class="gift-modal" id="giftModal" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle">
+  <div class="gift-modal-card">
+    <button type="button" class="gift-modal-close" id="giftModalClose" aria-label="Fechar">✕</button>
+    <p class="gift-modal-kicker">Você escolheu presentear com</p>
+    <h3 id="giftModalTitle">🎁 Presente</h3>
+    <p class="gift-modal-text">Faça um Pix no valor que desejar e ele será o seu presente para o Arthur! 💛</p>
+    <img src="assets/pix/pix-qr.png" alt="QR Code Pix" class="pix-qr">
+    <p class="gift-modal-hint">Aponte a câmera do app do seu banco para o QR code, ou copie a chave abaixo:</p>
+    <button type="button" id="giftModalCopyBtn" class="btn btn--primary gift-modal-copy">Copiar chave Pix</button>
+    <p class="gift-modal-receiver">Pix para: <strong>Aline Gerhardt Rodrigues</strong></p>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

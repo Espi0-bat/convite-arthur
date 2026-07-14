@@ -1,5 +1,13 @@
 const WHATSAPP_NUMBER = "5561985923161";
-const PHOTO_COUNT = 19;
+const PIX_CODE = "00020101021126330014br.gov.bcb.pix0111049644681945204000053039865802BR5924ALINE GERHARDT RODRIGUES6009SAO PAULO622905251KXENZFPJ57V5YPDM70TA7PPW6304A311";
+
+const PHOTOS = [
+  "arthur-01.jpeg", "arthur-02.jpeg", "arthur-03.jpeg", "arthur-04.jpeg",
+  "arthur-07.jpeg", "arthur-08.jpeg", "arthur-09.jpeg", "arthur-10.jpeg",
+  "arthur-11.jpeg", "arthur-12.jpeg", "arthur-13.jpeg", "arthur-14.jpeg",
+  "arthur-15.jpeg", "arthur-16.jpeg", "arthur-17.jpeg", "arthur-18.jpeg",
+  "arthur-19.jpeg",
+];
 
 // ---- Carousel ----
 const track = document.getElementById("carouselTrack");
@@ -7,21 +15,21 @@ const dotsWrap = document.getElementById("carouselDots");
 let current = 0;
 let autoplayTimer;
 
-for (let i = 1; i <= PHOTO_COUNT; i++) {
+PHOTOS.forEach((file, i) => {
   const img = document.createElement("img");
-  img.src = `assets/img/arthur-${String(i).padStart(2, "0")}.jpeg`;
-  img.alt = `Foto do Arthur ${i}`;
-  img.loading = i === 1 ? "eager" : "lazy";
+  img.src = `assets/img/${file}`;
+  img.alt = `Foto do Arthur ${i + 1}`;
+  img.loading = i === 0 ? "eager" : "lazy";
   track.appendChild(img);
 
   const dot = document.createElement("button");
-  dot.setAttribute("aria-label", `Ir para foto ${i}`);
-  dot.addEventListener("click", () => goTo(i - 1));
+  dot.setAttribute("aria-label", `Ir para foto ${i + 1}`);
+  dot.addEventListener("click", () => goTo(i));
   dotsWrap.appendChild(dot);
-}
+});
 
 function goTo(index) {
-  current = (index + PHOTO_COUNT) % PHOTO_COUNT;
+  current = (index + PHOTOS.length) % PHOTOS.length;
   track.style.transform = `translateX(-${current * 100}%)`;
   [...dotsWrap.children].forEach((d, i) => d.classList.toggle("active", i === current));
 }
@@ -79,18 +87,50 @@ function sendRsvp(going) {
 document.getElementById("rsvpYes").addEventListener("click", () => sendRsvp(true));
 document.getElementById("rsvpNo").addEventListener("click", () => sendRsvp(false));
 
-// ---- Copy Pix code ----
-const copyPixBtn = document.getElementById("copyPixBtn");
-const pixCodeInput = document.getElementById("pixCode");
-
-copyPixBtn.addEventListener("click", async () => {
+// ---- Copiar código Pix ----
+async function copyPix(button) {
   try {
-    await navigator.clipboard.writeText(pixCodeInput.value);
+    await navigator.clipboard.writeText(PIX_CODE);
   } catch (e) {
-    pixCodeInput.select();
+    const helper = document.createElement("textarea");
+    helper.value = PIX_CODE;
+    document.body.appendChild(helper);
+    helper.select();
     document.execCommand("copy");
+    helper.remove();
   }
-  const original = copyPixBtn.textContent;
-  copyPixBtn.textContent = "Copiado! ✓";
-  setTimeout(() => { copyPixBtn.textContent = original; }, 2000);
+  const original = button.textContent;
+  button.textContent = "Copiado! ✓";
+  setTimeout(() => { button.textContent = original; }, 2000);
+}
+
+document.getElementById("copyPixBtn").addEventListener("click", (e) => copyPix(e.currentTarget));
+
+// ---- Modal de presente via Pix ----
+const giftModal = document.getElementById("giftModal");
+const giftModalTitle = document.getElementById("giftModalTitle");
+
+document.querySelectorAll(".gift-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const gift = btn.dataset.gift;
+    const emoji = btn.dataset.emoji;
+    giftModalTitle.textContent = `${emoji} ${gift}`;
+    giftModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  });
 });
+
+function closeGiftModal() {
+  giftModal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("giftModalClose").addEventListener("click", closeGiftModal);
+giftModal.addEventListener("click", (e) => {
+  if (e.target === giftModal) closeGiftModal();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && giftModal.classList.contains("open")) closeGiftModal();
+});
+
+document.getElementById("giftModalCopyBtn").addEventListener("click", (e) => copyPix(e.currentTarget));
