@@ -17,12 +17,27 @@ let current = 0;
 let autoplayTimer;
 
 PHOTOS.forEach((file, i) => {
-  const img = document.createElement("img");
-  img.src = `assets/img/${file}`;
-  img.alt = `Foto do Arthur ${i + 1}`;
-  img.loading = i === 0 ? "eager" : "lazy";
-  img.decoding = "async";
-  track.appendChild(img);
+  const slide = document.createElement("div");
+  slide.className = "carousel-slide";
+
+  const bg = document.createElement("img");
+  bg.className = "carousel-bg";
+  bg.src = `assets/img/${file}`;
+  bg.alt = "";
+  bg.setAttribute("aria-hidden", "true");
+  bg.loading = i === 0 ? "eager" : "lazy";
+  bg.decoding = "async";
+
+  const photo = document.createElement("img");
+  photo.className = "carousel-photo";
+  photo.src = `assets/img/${file}`;
+  photo.alt = `Foto do Arthur ${i + 1}`;
+  photo.loading = i === 0 ? "eager" : "lazy";
+  photo.decoding = "async";
+
+  slide.appendChild(bg);
+  slide.appendChild(photo);
+  track.appendChild(slide);
 
   const dot = document.createElement("button");
   dot.setAttribute("aria-label", `Ir para foto ${i + 1}`);
@@ -36,8 +51,10 @@ function goTo(index) {
   [...dotsWrap.children].forEach((d, i) => d.classList.toggle("active", i === current));
 
   // pré-carrega a próxima foto para a troca ser instantânea
-  const next = track.children[(current + 1) % PHOTOS.length];
-  if (next && next.loading === "lazy") next.loading = "eager";
+  const nextSlide = track.children[(current + 1) % PHOTOS.length];
+  if (nextSlide) {
+    nextSlide.querySelectorAll("img").forEach((img) => { img.loading = "eager"; });
+  }
 }
 
 function stopAutoplay() {
