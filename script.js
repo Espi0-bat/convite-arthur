@@ -139,12 +139,12 @@ function sendRsvp(going) {
   const companions = Math.min(20, Math.max(0, parseInt(companionsInput.value, 10) || 0));
   let message;
   if (going) {
-    message = `Oi! Aqui é ${name}. Confirmando presença na festa de 1 aninho do Arthur! 🎉`;
+    message = `Oiii! Aqui é ${name} 💛 Passando pra confirmar que vou estar na festinha de 1 aninho do Arthur, mal posso esperar! 🎉🦁`;
     if (companions > 0) {
-      message += ` Vamos ${companions + 1} pessoas (com acompanhante${companions > 1 ? "s" : ""}).`;
+      message += ` Vou levar mais ${companions} acompanhante${companions > 1 ? "s" : ""}, somos ${companions + 1} ao todo!`;
     }
   } else {
-    message = `Oi! Aqui é ${name}. Infelizmente não conseguiremos ir na festa do Arthur, mas obrigado pelo convite! 💛`;
+    message = `Oiii! Aqui é ${name} 💛 Infelizmente não vou conseguir ir na festinha do Arthur dessa vez, mas fico na torcida e já mando um beijo grande pra ele! Agradeço muito o convite 🥰`;
   }
 
   // navegação na mesma aba: nunca é bloqueada por webviews (WhatsApp, Instagram)
