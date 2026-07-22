@@ -17,27 +17,13 @@ let current = 0;
 let autoplayTimer;
 
 PHOTOS.forEach((file, i) => {
-  const slide = document.createElement("div");
-  slide.className = "carousel-slide";
-
-  const bg = document.createElement("img");
-  bg.className = "carousel-bg";
-  bg.src = `assets/img/${file}`;
-  bg.alt = "";
-  bg.setAttribute("aria-hidden", "true");
-  bg.loading = i === 0 ? "eager" : "lazy";
-  bg.decoding = "async";
-
   const photo = document.createElement("img");
   photo.className = "carousel-photo";
   photo.src = `assets/img/${file}`;
   photo.alt = `Foto do Arthur ${i + 1}`;
   photo.loading = i === 0 ? "eager" : "lazy";
   photo.decoding = "async";
-
-  slide.appendChild(bg);
-  slide.appendChild(photo);
-  track.appendChild(slide);
+  track.appendChild(photo);
 
   const dot = document.createElement("button");
   dot.setAttribute("aria-label", `Ir para foto ${i + 1}`);
@@ -51,10 +37,8 @@ function goTo(index) {
   [...dotsWrap.children].forEach((d, i) => d.classList.toggle("active", i === current));
 
   // pré-carrega a próxima foto para a troca ser instantânea
-  const nextSlide = track.children[(current + 1) % PHOTOS.length];
-  if (nextSlide) {
-    nextSlide.querySelectorAll("img").forEach((img) => { img.loading = "eager"; });
-  }
+  const next = track.children[(current + 1) % PHOTOS.length];
+  if (next) next.loading = "eager";
 }
 
 function stopAutoplay() {
@@ -175,3 +159,18 @@ async function copyPix(button) {
 }
 
 document.getElementById("copyPixBtn").addEventListener("click", (e) => copyPix(e.currentTarget));
+
+// ---- Mostrar/esconder o card do Pix ----
+const togglePixBtn = document.getElementById("togglePixBtn");
+const pixCard = document.getElementById("pixCard");
+
+togglePixBtn.addEventListener("click", () => {
+  const isHidden = pixCard.hasAttribute("hidden");
+  if (isHidden) {
+    pixCard.removeAttribute("hidden");
+    pixCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  } else {
+    pixCard.setAttribute("hidden", "");
+  }
+  togglePixBtn.setAttribute("aria-expanded", String(isHidden));
+});

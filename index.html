@@ -143,20 +143,18 @@
   <section class="card" id="presentear">
     <div class="section-emoji" aria-hidden="true">🦒</div>
     <h2>Presentear</h2>
-    <p class="section-subtitle">Dê um presente para o Arthur e torne esse dia ainda mais especial!</p>
+    <p class="section-subtitle">Sua presença já é o nosso maior presente! Mas se quiser mimar o Arthur com um carinho, aqui vão duas ideias.</p>
 
-    <div class="gift-suggestions">
-      <h3>Lista de presentes</h3>
-      <p>A mamãe do Arthur separou algumas sugestões com carinho. Escolha a que quiser direto na Amazon:</p>
-      <a class="btn btn--primary btn--amazon" href="https://www.amazon.com.br/hz/wishlist/ls/FV7PYOLJSXJH?ref_=wl_share" target="_blank" rel="noopener noreferrer">
-        🛍️ Ver lista de presentes
+    <div class="gift-options">
+      <a class="gift-option" href="https://www.amazon.com.br/hz/wishlist/ls/FV7PYOLJSXJH?ref_=wl_share" target="_blank" rel="noopener noreferrer">
+        🛍️ Uma listinha de sugestões na Amazon
       </a>
-      <p class="gift-note">Se preferir, também pode trazer o presente em mãos no dia da festa! 🎁</p>
+      <button type="button" class="gift-option" id="togglePixBtn" aria-expanded="false" aria-controls="pixCard">
+        💸 Ou, se preferir, contribuir com um Pix
+      </button>
     </div>
 
-    <div class="pix-card">
-      <h3>Prefere mandar uma contribuição via Pix?</h3>
-      <p>Ótima opção pra quem mora longe e prefere contribuir em dinheiro.</p>
+    <div class="pix-card" id="pixCard" hidden>
       <img src="assets/pix/pix-qr.png" alt="QR Code Pix" class="pix-qr">
       <div class="pix-copy">
         <input type="text" id="pixCode" readonly>
